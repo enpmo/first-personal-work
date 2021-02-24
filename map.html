@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="echarts.min.js"></script>
+        <script src="word.js"></script>
+        <!-- 引用相关js文件 -->
+    </head>
+    <body>
+        <div id="main" style="width: 1500px;height:1000px;"></div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '新型冠状病毒疫情世界地图',
+                    left: 'center',
+                    top: '8%',
+                    subtext: '统计数据来自用友',
+                    sublink: 'https://api.yonyoucloud.com/apilink/tempServicePages/260492aa-6dbd-49f6-b82a-8a463b73ac33_true.html'
+                },
+                // tooltip: {
+                //     trigger: 'item',
+                //     formatter: function(params) {
+                //         var res = params.seriesName + ' - ';
+
+                //         if (isNaN(params.value)) {
+                //             res += params.name + '</br>确诊人数: 暂无数据'
+                //             return res
+                //         }
+                //         res += params.name + '</br>确诊人数: ' + params.value
+                //         return res;
+                //     }
+                // },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(params) {
+                        var res = params.name+'<br/>';
+                        var myseries = option.series;
+                        for (var i = 0; i < myseries.length; i++) {
+                            for(var j=0;j<myseries[i].data.length;j++){
+                                if(myseries[i].data[j].name==params.name){
+                                res+=myseries[i].name +' : '+myseries[i].data[j].value+'</br>';
+                        }
+                    }
+                }
+                return res;
+            }
+        },
+
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    left: 'right',
+                    top: 'center',
+                    feature: {
+                        dataView: {
+                            readOnly: false
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                visualMap: {
+                    min: 0,
+                    max: 30000000,
+                    text: ['High', 'Low'],
+                    realtime: false,
+                    calculable: true,
+                    itemWidth:50,                           //图形的宽度，即长条的宽度。
+                    itemHeight:140,      
+                    inRange: {
+                        color: ['blue', 'yellow', 'orangered', 'red']
+                    }
+                },
+                series: [{
+                    name: '全球疫情统计数据',
+                    type: 'map',
+                    mapType: 'world',
+                    roam: true,
+                    emphasis: {
+                        label: {
+                            show: true
+                        }
+                    },
+                    data:[{'name': 'Iran', 'value': 1566081}, {'name': 'Indonesia', 'value': 1271353}, {'name': 'India', 'value': 10991651}, {'name': 'Kazakhstan', 'value': 256388}, {'name': 'Turkey', 'value': 2638422}, {'name': 'Lebanon', 'value': 355073}, {'name': 'Israel', 'value': 744513}, {'name': 'Bangladesh', 'value': 543351}, {'name': 'Iraq', 'value': 664750}, {'name': 'Malaysia', 'value': 283569}, {'name': 'Palestine', 'value': 65802}, {'name': 'Cyprus', 'value': 33153}, {'name': 'Philippines', 'value': 561169}, {'name': 'Pakistan', 'value': 571174}, {'name': 'Jordan', 'value': 363728}, {'name': 'Japan', 'value': 424507}, {'name': 'Kuwait', 'value': 184090}, {'name': 'Qatar', 'value': 160426}, {'name': 'United Arab Emirates', 'value': 370425}, {'name': 'Korea', 'value': 87324}, {'name': 'Bahrain', 'value': 117809}, {'name': 'Myanmar', 'value': 141750}, {'name': 'Oman', 'value': 139362}, {'name': 'Sri Lanka', 'value': 79999}, {'name': 'Armenia', 'value': 170402}, {'name': 'Syria', 'value': 15143}, {'name': 'Afghanistan', 'value': 55604}, {'name': 'Georgia', 'value': 268355}, {'name': 'Maldives', 'value': 18612}, {'name': 'Saudi Arabia', 'value': 374691}, {'name': 'Azerbaijan', 'value': 233129}, {'name': 'Kyrgyzstan', 'value': 85885}, {'name': 'Nepal', 'value': 273431}, {'name': 'Republic of Yemen', 'value': 2161}, {'name': 'Thailand', 'value': 25415}, {'name': 'Uzbekistan', 'value': 79654}, {'name': 'Mongolia', 'value': 2586}, {'name': 'China', 'value': 101700}, {'name': 'Vietnam', 'value': 2383}, {'name': 'Tajikistan', 'value': 13714}, {'name': 'Singapore', 'value': 59858}, {'name': 'Cambodia', 'value': 533}, {'name': 'Timor-Leste', 'value': 103}, {'name': 'Bhutan', 'value': 866}, {'name': 'Laos', 'value': 45}, {'name': 'Brunei', 'value': 185}, {'name': 'United Kingdom', 'value': 4115509}, {'name': 'France', 'value': 3605181}, {'name': 'Spain', 'value': 3133122}, {'name': 'Netherlands', 'value': 1051965}, {'name': 'Belgium', 'value': 752379}, {'name': 'Sweden', 'value': 631166}, {'name': 'Serbia', 'value': 502622}, {'name': 'Italy', 'value': 2809246}, {'name': 'Russia', 'value': 4164726}, {'name': 'Switzerland', 'value': 547775}, {'name': 'Poland', 'value': 1638767}, {'name': 'Ireland', 'value': 215057}, {'name': 'Slovenia', 'value': 184351}, {'name': 'Greece', 'value': 178918}, {'name': 'Germany', 'value': 2394515}, {'name': 'Ukraine', 'value': 1304456}, {'name': 'Czech Republic', 'value': 1153159}, {'name': 'Portugal', 'value': 797525}, {'name': 'Hungary', 'value': 403023}, {'name': 'Romania', 'value': 779695}, {'name': 'Albania', 'value': 99062}, {'name': 'Slovakia', 'value': 292143}, {'name': 'Bulgaria', 'value': 236666}, {'name': 'Finland', 'value': 53742}, {'name': 'Austria', 'value': 443536}, {'name': 'Norway', 'value': 68315}, {'name': 'Estonia', 'value': 57616}, {'name': 'Lithuania', 'value': 194051}, {'name': 'Moldova', 'value': 176752}, {'name': 'BIH', 'value': 128049}, {'name': 'Latvia', 'value': 81519}, {'name': 'Montenegro', 'value': 71593}, {'name': 'Belarus', 'value': 278312}, {'name': 'Northern Macedonia', 'value': 99031}, {'name': 'Denmark', 'value': 207081}, {'name': 'Luxembourg', 'value': 53968}, {'name': 'Malta', 'value': 20892}, {'name': 'Croatia', 'value': 239945}, {'name': 'Andorra', 'value': 10672}, {'name': 'Monaco', 'value': 1862}, {'name': 'San Marino', 'value': 3472}, {'name': 'Liechtenstein', 'value': 2617}, {'name': 'Guernsey', 'value': 813}, {'name': 'Gibraltarian', 'value': 4228}, {'name': 'Jersey', 'value': 3215}, {'name': 'Iceland', 'value': 6045}, {'name': 'Isle of man', 'value': 449}, {'name': 'Faroe Islands', 'value': 658}, {'name': 'vatican', 'value': 29}, {'name': 'United States', 'value': 28133620}, {'name': 'Mexico', 'value': 2038276}, {'name': 'Puerto Rico', 'value': 98835}, {'name': 'Honduras', 'value': 164495}, {'name': 'Dominican', 'value': 235462}, {'name': 'Canada', 'value': 845324}, {'name': 'Costa Rica', 'value': 201678}, {'name': 'Panama', 'value': 336521}, {'name': 'Jamaica', 'value': 20924}, {'name': 'Guatemala', 'value': 171170}, {'name': 'Cuba', 'value': 43484}, {'name': 'El Salvador', 'value': 58546}, {'name': 'Haiti', 'value': 12274}, {'name': 'Nicaragua', 'value': 6398}, {'name': 'Bahamas', 'value': 8403}, {'name': 'Barbados', 'value': 2772}, {'name': 'Belize', 'value': 12227}, {'name': 'Trinidad and Tobago', 'value': 7666}, {'name': 'Dominica', 'value': 134}, {'name': 'Bermuda', 'value': 699}, {'name': 'Montserrat', 'value': 20}, {'name': 'Greenland', 'value': 30}, {'name': 'Brazil', 'value': 10168174}, {'name': 'Argentina', 'value': 2060572}, {'name': 'Peru', 'value': 1275899}, {'name': 'Colombia', 'value': 2222018}, {'name': 'Bolivia', 'value': 242292}, {'name': 'Chile', 'value': 799460}, {'name': 'Paraguay', 'value': 151718}, {'name': 'Ecuador', 'value': 274673}, {'name': 'Venezuela', 'value': 135603}, {'name': 'Uruguay', 'value': 52815}, {'name': 'Guyana', 'value': 8399}, {'name': 'Suriname', 'value': 8868}, {'name': 'South Africa', 'value': 1503796}, {'name': 'Algeria', 'value': 111917}, {'name': 'Tunisia', 'value': 227643}, {'name': 'Egypt', 'value': 178151}, {'name': 'Uganda', 'value': 40213}, {'name': 'Nigeria', 'value': 152074}, {'name': 'Mozambique', 'value': 55643}, {'name': 'Ethiopia', 'value': 152806}, {'name': 'Kenya', 'value': 104201}, {'name': 'Swaziland', 'value': 16764}, {'name': 'Malawi', 'value': 30742}, {'name': 'Morocco', 'value': 480948}, {'name': 'Lesotho', 'value': 10461}, {'name': 'Ghana', 'value': 80253}, {'name': 'Sudan', 'value': 30128}, {'name': 'Senegal', 'value': 32927}, {'name': 'Botswana', 'value': 26524}, {'name': 'Zimbabwe', 'value': 35768}, {'name': 'Somalia', 'value': 6017}, {'name': 'Namibia', 'value': 37295}, {'name': 'Cameroon', 'value': 33749}, {'name': 'Mali', 'value': 8292}, {'name': 'Gabon', 'value': 13553}, {'name': 'Benin', 'value': 5143}, {'name': 'Guinea', 'value': 15303}, {'name': 'Sierra Leone', 'value': 3855}, {'name': 'Angola', 'value': 20499}, {'name': 'Rwanda', 'value': 18053}, {'name': 'Eritrea', 'value': 2685}, {'name': 'Togo', 'value': 6319}, {'name': 'Burkina Faso', 'value': 11783}, {'name': 'Seychelles', 'value': 2328}, {'name': 'Gambia', 'value': 4543}, {'name': 'Chad', 'value': 3794}, {'name': 'Niger', 'value': 4733}, {'name': 'Madagascar', 'value': 19598}, {'name': 'Cape Verde', 'value': 15048}, {'name': 'Comoros', 'value': 3558}, {'name': 'Tanzania', 'value': 509}, {'name': 'Mauritania', 'value': 17083}, {'name': 'Djibouti', 'value': 6022}, {'name': 'Liberia', 'value': 1988}, {'name': 'Mauritius', 'value': 603}, {'name': 'Australia', 'value': 28926}, {'name': 'Papua New Guinea', 'value': 970}, {'name': 'New Zealand', 'value': 2307}, {'name': 'New Caledonia', 'value': 55}, {'name': 'Fiji', 'value': 56}]
+                    }]
+            };
+            myChart.setOption(option);
+            window.onresize = function() {
+                myChart.resize();
+            }
+        </script>
+    </body>
+</html>
