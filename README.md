@@ -1,2 +1,4 @@
 # first-personal-work
-处理
+数据展示：
+收集的json数据
+处理后的json数据
